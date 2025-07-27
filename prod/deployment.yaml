@@ -1,1 +1,21 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-react-app-prod
+  labels:
+    app: my-react-app-prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-react-app-prod
+  template:
+    metadata:
+      labels:
+        app: my-react-app-prod
+    spec:
+      containers:
+      - name: my-react-app-dev
+        image: myregistry.io/my-docker-repo/my-react-app-prod:latest
+        ports:
+        - containerPort: 80
